@@ -6,7 +6,7 @@ int main() {
     assert(a.size()==4 && !a.empty());
 
     assert(a[0]==5);
-    a[2] = 42;                 // تغییر اندیس
+    a[2] = 42;               
     assert(a[2]==42);
 
     auto v0 = a.at(0);
@@ -15,8 +15,8 @@ int main() {
     assert(!v4);
 
     auto s = a.to_sorted();
-    assert((s == std::vector<int>{2,2,5,42}));        // حالا درست
-    assert(a[0]==5 && a[1]==2 && a[2]==42 && a[3]==2); // state داخلی دست‌نخورده
+    assert((s == std::vector<int>{2,2,5,42}));        
+    assert(a[0]==5 && a[1]==2 && a[2]==42 && a[3]==2); 
 
     assert(a.max_or("x",-1)==42);
     MiniArray e;

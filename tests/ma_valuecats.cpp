@@ -4,11 +4,11 @@
 
 int main() {
     MiniArray a(std::vector<int>{3,1,4});
-    auto copy1 = a.take(); // lvalue overload → copy
+    auto copy1 = a.take(); 
     assert((copy1 == std::vector<int>{3,1,4}));
     assert(a.size()==3 && a[0]==3 && a[1]==1 && a[2]==4);
 
-    auto moved = std::move(a).take(); // rvalue overload → move
+    auto moved = std::move(a).take(); 
     assert((moved == std::vector<int>{3,1,4}));
     assert(a.size()==0);
 
