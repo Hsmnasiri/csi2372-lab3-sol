@@ -9,8 +9,8 @@ MiniArray::MiniArray(std::vector<int> init) : data_{std::move(init)} {}
 std::size_t MiniArray::size() const noexcept { return data_.size(); }
 bool MiniArray::empty() const noexcept { return data_.empty(); }
 
-int& MiniArray::operator[](std::size_t i) & { return data_[i]; }
-const int& MiniArray::operator[](std::size_t i) const & { return data_[i]; }
+int& MiniArray::operator[](std::size_t i) &            { return data_[i]; }
+const int& MiniArray::operator[](std::size_t i) const &{ return data_[i]; }
 
 std::optional<int> MiniArray::at(std::size_t i) const {
     if (i < data_.size()) return data_[i];
