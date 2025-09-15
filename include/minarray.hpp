@@ -15,26 +15,30 @@ public:
     std::size_t size() const noexcept;
     bool empty() const noexcept;
 
-    int& operator[](std::size_t i) &;             // lvalue, non-const
-    const int& operator[](std::size_t i) const &; // lvalue, const
+    // element access (lvalue overloads)
+    int& operator[](std::size_t i) &;
+    const int& operator[](std::size_t i) const &;
 
+    // safe access
     std::optional<int> at(std::size_t i) const;
 
+    // modifiers
     void push(int v);
     std::optional<int> pop();
 
+    // algorithms
     std::vector<int> to_sorted() const;
     int max_or(std::string_view label, int fallback) const;
 
     // value categories (ref-qualified)
-    std::vector<int> take() &&;  // rvalue → move out, leave empty
-    std::vector<int> take() &;   // lvalue → return copy
+    std::vector<int> take() &&;  // rvalue: move out, leave empty
+    std::vector<int> take() &;   // lvalue: copy, keep state
 
 private:
     std::vector<int> data_;
 };
 
-// binding rules / temporary materialization
+// free functions
 const int& head_ref(const MiniArray& a);
 int head_value(MiniArray a);
 
