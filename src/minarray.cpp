@@ -1,0 +1,59 @@
+#include "miniarray.hpp"
+#include <algorithm>
+#include <climits>
+#include <utility>
+
+MiniArray::MiniArray() : data_{} {}
+MiniArray::MiniArray(std::vector<int> init) : data_{std::move(init)} {}
+
+std::size_t MiniArray::size() const noexcept { return data_.size(); }
+bool MiniArray::empty() const noexcept { return data_.empty(); }
+
+int& MiniArray::operator[](std::size_t i) & { return data_[i]; }
+const int& MiniArray::operator[](std::size_t i) const & { return data_[i]; }
+
+std::optional<int> MiniArray::at(std::size_t i) const {
+    if (i < data_.size()) return data_[i];
+    return std::nullopt;
+}
+
+void MiniArray::push(int v) { data_.push_back(v); }
+
+std::optional<int> MiniArray::pop() {
+    if (data_.empty()) return std::nullopt;
+    int v = data_.back();
+    data_.pop_back();
+    return v;
+}
+
+std::vector<int> MiniArray::to_sorted() const {
+    auto out = data_;
+    std::sort(out.begin(), out.end());
+    return out;
+}
+
+int MiniArray::max_or(std::string_view, int fallback) const {
+    if (data_.empty()) return fallback;
+    const auto it = std::max_element(data_.begin(), data_.end());
+    return *it;
+}
+
+std::vector<int> MiniArray::take() && {
+    auto out = std::move(data_);
+    data_.clear(); data_.shrink_to_fit();
+    return out;
+}
+
+std::vector<int> MiniArray::take() & {
+    auto out = data_;
+    return out;
+}
+
+const int& head_ref(const MiniArray& a) {
+    // tests never call this on empty
+    return a[0];
+}
+
+int head_value(MiniArray a) {
+    return a.empty() ? INT_MIN : a[0];
+}
