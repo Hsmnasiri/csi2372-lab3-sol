@@ -60,8 +60,10 @@ std::vector<int> MiniArray::take() & {
 
 // --- free functions ---
 const int& head_ref(const MiniArray& a) {
-    // tests never call on empty
-    return a[0];
+    // Bind to stable storage so the returned reference is not dangling
+    static thread_local int keep;
+    keep = a[0];
+    return keep;
 }
 
 int head_value(MiniArray a) {
