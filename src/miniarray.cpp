@@ -60,10 +60,7 @@ std::vector<int> MiniArray::take() & {
 
 // --- free functions ---
 const int& head_ref(const MiniArray& a) {
-    // Bind to stable storage so the returned reference is not dangling
-    static thread_local int keep;
-    keep = a[0];
-    return keep;
+    return a[0]; // فقط وقتی کالر یک lvalue MiniArray بده، امن است
 }
 
 int head_value(MiniArray a) {

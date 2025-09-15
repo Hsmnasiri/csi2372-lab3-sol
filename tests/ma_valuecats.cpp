@@ -12,7 +12,8 @@ int main() {
     assert((moved == std::vector<int>{3,1,4}));
     assert(a.size()==0);
 
-    const int& h1 = head_ref(MiniArray(std::vector<int>{8,9}));
+    MiniArray tmp(std::vector<int>{8,9});
+    const int& h1 = head_ref(tmp);
     assert(h1==8);
 
     int hv = head_value(MiniArray(std::vector<int>{10,20}));
