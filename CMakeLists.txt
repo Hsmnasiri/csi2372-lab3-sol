@@ -20,7 +20,14 @@ target_include_directories(debug_utils PUBLIC include)
 add_executable(dbg_tests tests/dbg_tests.cpp)
 target_link_libraries(dbg_tests PRIVATE debug_utils)
 
+add_library(auto_minitask src/auto_minitask.cpp)
+target_include_directories(auto_minitask PUBLIC include)
+
+add_executable(auto_task tests/auto_task.cpp)
+target_link_libraries(auto_task PRIVATE auto_minitask)
+
 include(CTest)
 add_test(NAME ma_core      COMMAND $<TARGET_FILE:ma_core>)
 add_test(NAME ma_valuecats COMMAND $<TARGET_FILE:ma_valuecats>)
 add_test(NAME dbg_tests    COMMAND $<TARGET_FILE:dbg_tests>)
+add_test(NAME auto_task COMMAND $<TARGET_FILE:auto_task>)
